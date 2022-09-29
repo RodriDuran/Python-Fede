@@ -1,0 +1,583 @@
+[
+    {
+        "id": "73f4e3e687ac0ff4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a59c4a54c60aefb6",
+        "type": "tab",
+        "label": "Contador",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b9cc893b2e87673b",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c058aa0bd1c02d65",
+        "type": "mqtt-broker",
+        "name": "vps",
+        "broker": "sistemas.onthewifi.com",
+        "port": "8883",
+        "tls": "82b9974bbe989346",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "compatmode": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "82b9974bbe989346",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "cert.pem",
+        "keyname": "privkey.pem",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true
+    },
+    {
+        "id": "5107ece1d6247148",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "Datos",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "a33a0bb570c93ce8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "fedealbesa.sytes.net",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e358d2aeda0e5a8a",
+        "type": "mqtt in",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "topic": "/consulta/",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "a33a0bb570c93ce8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 220,
+        "wires": [
+            [
+                "8027be52077d58fa",
+                "30a529675a4e10ed",
+                "a815b45f65facd8c"
+            ]
+        ]
+    },
+    {
+        "id": "8027be52077d58fa",
+        "type": "debug",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "817a632eec8e3972",
+        "type": "mysql",
+        "z": "73f4e3e687ac0ff4",
+        "mydb": "5107ece1d6247148",
+        "name": "",
+        "x": 1090,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30a529675a4e10ed",
+        "type": "exec",
+        "z": "73f4e3e687ac0ff4",
+        "command": "python3 /home/bian/Desktop/Medidas/telemetria-python/consulta_fecha.py ",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 990,
+        "y": 100,
+        "wires": [
+            [
+                "79b2d8d188056cfb",
+                "1b0297bdb946bb5c"
+            ],
+            [
+                "aabc3fdf44833cbc"
+            ],
+            [
+                "eac8fd6220391aec"
+            ]
+        ]
+    },
+    {
+        "id": "79b2d8d188056cfb",
+        "type": "debug",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a815b45f65facd8c",
+        "type": "mqtt out",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "topic": "/recibe/consulta/1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a33a0bb570c93ce8",
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1b0297bdb946bb5c",
+        "type": "mqtt out",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "topic": "/respuesta/1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a33a0bb570c93ce8",
+        "x": 1550,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "aabc3fdf44833cbc",
+        "type": "debug",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "eac8fd6220391aec",
+        "type": "debug",
+        "z": "73f4e3e687ac0ff4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7d05e1d63212eb36",
+        "type": "exec",
+        "z": "a59c4a54c60aefb6",
+        "command": "python3 /home/bian/Desktop/Medidas/telemetria-python/counter.py",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "cc03323a2e9de8b0",
+                "f9b90f5d88fdb833"
+            ],
+            [
+                "93b208d41b1a0b33"
+            ],
+            [
+                "db7ec1aaebbced8c"
+            ]
+        ]
+    },
+    {
+        "id": "60a4ad2e1d517cab",
+        "type": "inject",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "7d05e1d63212eb36"
+            ]
+        ]
+    },
+    {
+        "id": "3f5ecc271ee9930c",
+        "type": "exec",
+        "z": "a59c4a54c60aefb6",
+        "d": true,
+        "command": "python /home/pi/contador_pulsos/counter.py",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cc03323a2e9de8b0",
+        "type": "json",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "b017275fcdf13c3f",
+                "938faf9a02bfc30a"
+            ]
+        ]
+    },
+    {
+        "id": "b017275fcdf13c3f",
+        "type": "function",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "func": "var json = msg.payload\n\nvar time =parseFloat( json.timestamp); //Only give the number\n\nvar count = parseInt (json.counter); //Only give the number\nquery = 'INSERT INTO consumo(date,valor) VALUES('+time+','+count+');'; //Creates query with the recorded temp value\nmsg.topic = query; //Put query into the msg.tofpic\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 300,
+        "wires": [
+            [
+                "8e4420f7fc6b43c8",
+                "d5d0771dd7e97bcb"
+            ]
+        ]
+    },
+    {
+        "id": "938faf9a02bfc30a",
+        "type": "function",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "func": "msg.payload=msg.payload['counter']\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 400,
+        "wires": [
+            [
+                "8928e08fd86cd410",
+                "136ffcc244bcbd06"
+            ]
+        ]
+    },
+    {
+        "id": "8928e08fd86cd410",
+        "type": "mqtt out",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "topic": "/nodo/1/contador",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a33a0bb570c93ce8",
+        "x": 1210,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f9b90f5d88fdb833",
+        "type": "debug",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 710,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "136ffcc244bcbd06",
+        "type": "debug",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1090,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "26c24855a0917009",
+        "type": "mqtt out",
+        "z": "a59c4a54c60aefb6",
+        "d": true,
+        "name": "",
+        "topic": "/stampa",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c058aa0bd1c02d65",
+        "x": 1060,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e3e93e01ddfe36f1",
+        "type": "inject",
+        "z": "a59c4a54c60aefb6",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 740,
+        "y": 560,
+        "wires": [
+            [
+                "4991b4cda548f15d",
+                "26c24855a0917009",
+                "8928e08fd86cd410"
+            ]
+        ]
+    },
+    {
+        "id": "4991b4cda548f15d",
+        "type": "debug",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 960,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "8e4420f7fc6b43c8",
+        "type": "mysql",
+        "z": "a59c4a54c60aefb6",
+        "mydb": "5107ece1d6247148",
+        "name": "",
+        "x": 1140,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93b208d41b1a0b33",
+        "type": "debug",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "db7ec1aaebbced8c",
+        "type": "debug",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d5d0771dd7e97bcb",
+        "type": "debug",
+        "z": "a59c4a54c60aefb6",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 120,
+        "wires": []
+    }
+]

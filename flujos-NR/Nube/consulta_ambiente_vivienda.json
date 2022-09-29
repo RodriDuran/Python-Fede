@@ -1,0 +1,341 @@
+[
+    {
+        "id": "a6e7433e99035909",
+        "type": "tab",
+        "label": "Descargas",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c1afea33a05cd1d2",
+        "type": "function",
+        "z": "a6e7433e99035909",
+        "name": "Set base path",
+        "func": "//restrict to c:\\temp\\\nvar basePath = \"/home/perico/\";\nvar filename = msg.req.params.fn;\n\n\nif(filename.includes(\"..\\\\\")){\n    msg.payload = \"Illegal file path\";\n    msg.statusCode = 405;//not allowed\n    return [null, msg];//fire output 2\n} else if(filename.includes(\"../\")){\n    msg.payload = \"Illegal file path\";\n    msg.statusCode = 405;//not allowed\n    return [null, msg];//fire output 2\n} \n//TODO: add more checks\n\nmsg.filename = basePath + filename;\nreturn [msg, null];//fire output 1\n\n\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 200,
+        "wires": [
+            [
+                "58def002adc2032a"
+            ],
+            [
+                "6793d08395022961"
+            ]
+        ]
+    },
+    {
+        "id": "6793d08395022961",
+        "type": "http response",
+        "z": "a6e7433e99035909",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 810,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "58def002adc2032a",
+        "type": "file in",
+        "z": "a6e7433e99035909",
+        "name": "",
+        "filename": "",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "6793d08395022961"
+            ]
+        ]
+    },
+    {
+        "id": "f9e54e04f95a0a26",
+        "type": "catch",
+        "z": "a6e7433e99035909",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "8d12e4c97fe483f6",
+                "0167184090aea5ac"
+            ]
+        ]
+    },
+    {
+        "id": "8d12e4c97fe483f6",
+        "type": "function",
+        "z": "a6e7433e99035909",
+        "name": "Set 404",
+        "func": "msg.payload = msg.error;\nmsg.statusCode = 404;//resource not found\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 280,
+        "wires": [
+            [
+                "6793d08395022961"
+            ]
+        ]
+    },
+    {
+        "id": "0167184090aea5ac",
+        "type": "debug",
+        "z": "a6e7433e99035909",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 310,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c3c558213665f643",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "group": "85ca830f201f68d1",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": "12",
+        "height": "1",
+        "format": "<div >1\n     <button onclick=\"document.location='/files/consulta.csv'\">DESCARGAR consulta.csv</button> \n     \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 650,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "574d6587874bc415",
+        "type": "comment",
+        "z": "a6e7433e99035909",
+        "name": "Create http endpoint <nodered>/files/xxx  where xxx is the file name to download",
+        "info": "",
+        "x": 500,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bfbce3ae1cbca791",
+        "type": "http in",
+        "z": "a6e7433e99035909",
+        "name": "",
+        "url": "/files/:fn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "c1afea33a05cd1d2"
+            ]
+        ]
+    },
+    {
+        "id": "53cb6a0e902a2933",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "d": true,
+        "group": "1eac260f0899ac08",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div >1\n      <button onclick=\"document.location='/files/valor_hsv.txt'\">DESCARGAR colores.txt</button> \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 670,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "820b273e26183f00",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "d": true,
+        "group": "1eac260f0899ac08",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div >1\n      <button onclick=\"document.location='/files/lacamara.txt'\">DESCARGAR lista de fotos</button> \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 670,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7f04e01fdfc7f63",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "d": true,
+        "group": "b2e70419549a0658",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div >1\n      <button onclick=\"document.location='/files/fotos-secador.zip'\">DESCARGAR fotos</button> \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 670,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d43ad83b35fb07c",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "d": true,
+        "group": "1eac260f0899ac08",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div >1\n      <button onclick=\"document.location='/files/fotos-procesadas.zip'\">DESCARGAR fotos procesadas </button> \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 670,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e702b0500d6bd311",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "group": "85ca830f201f68d1",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": "12",
+        "height": "1",
+        "format": "<div >2\n     <button onclick=\"document.location='/files/consulta-ambiente.csv'\">DESCARGAR consulta-ambiente.csv</button> \n     \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 650,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3b62d7ed14acb38",
+        "type": "ui_template",
+        "z": "a6e7433e99035909",
+        "group": "85ca830f201f68d1",
+        "name": "ui_temlplate - present download links on dashboard",
+        "order": 0,
+        "width": "12",
+        "height": "1",
+        "format": "<div >3\n     <button onclick=\"document.location='/files/consulta-vivienda.csv'\">DESCARGAR consulta-vivienda.csv</button> \n     \n\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 630,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85ca830f201f68d1",
+        "type": "ui_group",
+        "name": "Consulta enviada:",
+        "tab": "d6777cb5917a7b43",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1eac260f0899ac08",
+        "type": "ui_group",
+        "name": "Procesamiento Imagenes",
+        "tab": "ef7af668dcfd7364",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b2e70419549a0658",
+        "type": "ui_group",
+        "name": "Todas las fotos",
+        "tab": "34926ac6935364ea",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d6777cb5917a7b43",
+        "type": "ui_tab",
+        "name": "Formulario consulta",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ef7af668dcfd7364",
+        "type": "ui_tab",
+        "name": "Descargas",
+        "icon": "dashboard",
+        "order": 5
+    },
+    {
+        "id": "34926ac6935364ea",
+        "type": "ui_tab",
+        "name": "Fotos",
+        "icon": "dashboard",
+        "order": 11,
+        "disabled": false,
+        "hidden": false
+    }
+]
